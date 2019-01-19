@@ -12,3 +12,7 @@
 - HW: Aurix TC275 ShieldBuddy
 - Compiler: HighTec Free Compiler
 - Debugger: Pls UDE as a part of free evluation tool bundle
+
+## Design
+- LLD + Erika3
+- os.h, ee.mk 
