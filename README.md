@@ -14,5 +14,19 @@
 - Debugger: Pls UDE as a part of free evluation tool bundle
 
 ## Design
-- LLD + Erika3
+- iLLD + Erika3
 - os.h, ee.mk 
+
+## Integration
+
+### Folder Layout
+ - config
+ - cpu
+ - kernel
+ - license.txt
+
+Copy...
+OS SOURCE CODE
+\plugins\com.eu.evidence.ee3_3.0.1.20181217_gh55\ee_files\
+
+OS TOOL (RTDruid)
