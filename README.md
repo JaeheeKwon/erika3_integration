@@ -1,7 +1,7 @@
 # Erika Version 3 integration
 
 ## Introduction
- OSEK OS 오픈소스 프로젝트인 Erika 3 RTOS를 기존 Infineon의 AURIX용 개발환경인 
+ OSEK OS 오픈소스 프로젝트인 Erika 3 RTOS를 Infineon의 AURIX용 개발환경인 BIFACES에 통합하는 것을 목표로 한다.
 
 
 ## Necessary Softwares (Not included in this repo)
