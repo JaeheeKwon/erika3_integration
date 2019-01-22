@@ -1,6 +1,8 @@
 # Erika Version 3 integration
 
 ## Introduction
+ 본 프로젝트는 ...
+
  Just to provide an Erika V3 OSEK OS integration into the Bifaces SW development environment from Infineon.
  The current Bifaces does support Erika V2 and this porject will just follow the same way, i.e. Makefile modfication.
 
