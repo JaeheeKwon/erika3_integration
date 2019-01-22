@@ -1,10 +1,7 @@
 # Erika Version 3 integration
 
 ## Introduction
- 본 프로젝트는 ...
-
- Just to provide an Erika V3 OSEK OS integration into the Bifaces SW development environment from Infineon.
- The current Bifaces does support Erika V2 and this porject will just follow the same way, i.e. Makefile modfication.
+ OSEK OS 오픈소스 프로젝트인 Erika 3 RTOS를 기존 Infineon의 AURIX용 개발환경인 Bifaces에 적용한다. 
 
 ## Necessary Softwares (Not included in this repo)
 - Erika3: download from Erika website.
