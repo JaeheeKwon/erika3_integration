@@ -14,7 +14,7 @@
 
 ## Design
 - iLLD + Erika3
-- os.h, ee.mk 
+- os.h, ee.mk
 
 ## Integration
 
@@ -28,3 +28,22 @@ Copy...
 OS SOURCE CODE
 \plugins\com.eu.evidence.ee3_3.0.1.20181217_gh55\ee_files\
 OS TOOL (RTDruid)
+
+Download Erika3
+http://www.erika-enterprise.com/index.php/download/erika-v3-download.html
+
+![](./img/gh55.png)
+
+- unzip it to OsTool
+- Edit OsCfgGen.mk
+> B_RT_DRUID_CMD=java -jar "$(B_RT_DRUID_TOOLS_DIR)/plugins/org.eclipse.equinox.launcher_1.5.0.v20180512-1130.jar"\
+-data $(B_RT_DRUID_TEMP_DIR)/workspace -application com.eu.evidence.rtdruid3.oil.ee.core.generator 
+
+c:\Tools\BifacesWin64_Erika3\OsTools\RT-Druid\plugins\com.eu.evidence.ee3_3.0.1.20181217_gh55\ee_files\
+
+
+c:\Tools\BifacesWin64_Erika3\OsTools\RT-Druid\plugins\com.eu.evidence.ee3_3.0.1.20181217_gh55\ee_files\pkg\
+
+
+Erika3는 ee_pull.mk를 이용해서 코드를 프로젝트별로 복사한다.
+OsCfgGen.mk를 변경해야함
