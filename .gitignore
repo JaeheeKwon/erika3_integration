@@ -52,3 +52,17 @@ Mkfile.old
 dkms.conf
 *.*~
 .vs/**
+
+
+
+
+*~
+OsTools
+0_Src/Os/erika
+0_Src/Os/out
+0_Src/AppSw/CpuGeneric
+0_Src/AppSw/Tricore/Main
+0_Src/BaseSw
+2_Out
+*.7z
+*.swp
