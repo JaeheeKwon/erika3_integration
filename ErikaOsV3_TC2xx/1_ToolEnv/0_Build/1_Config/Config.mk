@@ -1,3 +1,4 @@
+# The copyright text is from the original 
 ###############################################################################
 #                                                                             #
 #       Copyright (c) 2018 Infineon Technologies AG. All rights reserved.     #
@@ -33,12 +34,12 @@ ILLD_VERSION:= __illd_version__
 #Include all the required/available configuration files
 -include $(B_CONFIG_FILES_FOLDER)/*/Conf*.mk \
 		$(B_CONFIG_FILES_FOLDER)/*/*/Conf*.mk
-		
+
 #Use the parallel build option from make (use available CPUs from your PC).
 #NOTE: this option would be moved to Config.xml in the next BIFACES release!
 B_PARALLEL_BUILD= yes
 
-# Redefine OS Configuration 
+# Redefine OS Configuration
 B_OSCONFIGGEN_MAKE_FILE= OsTools/OsCfgGen.mk
 
 #RT-Druid gh55

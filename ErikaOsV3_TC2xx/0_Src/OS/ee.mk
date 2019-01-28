@@ -1,3 +1,4 @@
+# modified for Erika3 integration
 ###############################################################################
 #                                                                             #
 #        Copyright ? 2011 Infineon Technologies AG. All rights reserved.      #
