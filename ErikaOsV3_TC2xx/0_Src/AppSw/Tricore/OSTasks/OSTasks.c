@@ -41,11 +41,13 @@
 #define Ifx_OSTask_SetEvent(x,y)
 #endif
 
+char led = 0;
+
 void Ifx_OSTask_ApplicationInit(void)
 {
 	StartOS(TRICORE_CPU);
 }
-
+#if 0
 /*Define an ISR category 1 to trigger OS ticks
  * Category 2 ISR is not needed here the call
  * CounterTick is not restricted*/
@@ -59,6 +61,7 @@ IFX_INTERRUPT(Ifx_OSTask_OSTickIsr,0,10)
 
     TriboardLed_serviceDimmer(); //TODO : Application call
 }
+#endif
 
 /*Define an ISR category 2 to trigger events.
  * Category 2 ISR needed here because of the call restriction
@@ -173,6 +176,9 @@ TASK(IFX_OSTASK_10MS)
 	Ifx_OSTask_10ms_Count++;
 	{
 		/*Call your 10ms functions here*/
+
+
+		P02_OUT.B.P6 ^= 1;
 	}
 	TerminateTask();
 }
@@ -194,6 +200,9 @@ TASK(IFX_OSTASK_50MS)
 	{
 		/*Call your 100ms functions here*/
 		//Ifx_OSTask_SetEvent (IFX_OSTASK_EVENT1, 1);
+		//
+		//
+		//
 	}
 	TerminateTask();
 }
@@ -221,6 +230,8 @@ TASK(IFX_OSTASK_BACKGROUND)
 	}
 	TerminateTask();
 }
+#define OSEE_TC2YX_OUTPUT_PUSH_PULL_GP	0x10U
+
 
 TASK(IFX_OSTASK_INIT)
 {
@@ -231,17 +242,19 @@ TASK(IFX_OSTASK_INIT)
 
 /*  Alarms are Auto started with the same parameters as below. Code below is not necessary.
  * You could also implement this if you want to change the parameters of alarms
- *//*
+ */
 	SetRelAlarm(IFX_OSTASK_ALARM_1MS,5,10);
 	SetRelAlarm(IFX_OSTASK_ALARM_5MS,25,50);
 	SetRelAlarm(IFX_OSTASK_ALARM_10MS,50,100);
 	SetRelAlarm(IFX_OSTASK_ALARM_20MS,100,200);
 	SetRelAlarm(IFX_OSTASK_ALARM_50MS,250,500);
 	SetRelAlarm(IFX_OSTASK_ALARM_100MS,500,1000);
-*/
 
-	Ifx_OSTask_initStm0Ticks ();
+	/// Ifx_OSTask_initStm0Ticks ();
 	Ifx_OSTask_initBlinkyLedFunction();
+	led = 0;	
+	 P02_IOCR4.B.PC6    =   OSEE_TC2YX_OUTPUT_PUSH_PULL_GP;
+
 	TriboardLed_init(); //TODO : Application call
 
 	ActivateTask(IFX_OSTASK_EVENT1);
