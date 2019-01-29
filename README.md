@@ -29,3 +29,4 @@ BIFACES환경에서 Erika 3 RTOS 지원하기위한 모듈과 Makefile을 제공
 
 ## ToDo
 - HW 테스트 중: ISR 및 OS timer(Stm)동작 확인완료 (Led Blink)
+    ![](./img/debug.png)
