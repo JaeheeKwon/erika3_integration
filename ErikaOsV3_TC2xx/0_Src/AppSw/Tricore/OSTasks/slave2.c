@@ -1,3 +1,4 @@
+#include "os.h"
 #include "shared.h"
 
 void idle_hook_core2(void);
@@ -8,7 +9,7 @@ void idle_hook_core2(void)
 
 TASK(TaskSlave2)
 {
-//  led_blink(OSEE_TRIBOARD_2X5_LED_3);
+//  led_blink(OSEE_SHIELDBUDDY_2X5_LED_3);
 //  SetRelAlarm(AlarmSlave2RemoteCPU0, 50, 0);
   TerminateTask();
 }

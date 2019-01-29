@@ -1,7 +1,7 @@
 # Erika Version 3 integration
 
 ## Warning...
-COMPILE만 됨. HW 테스트 진행중
+HW 테스트 진행중
 
 ## Introduction
 BIFACES환경에서 Erika 3 RTOS 지원

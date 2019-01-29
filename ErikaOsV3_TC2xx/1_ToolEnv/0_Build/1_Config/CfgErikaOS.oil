@@ -1,57 +1,41 @@
 CPU test_application {
-  OS EE {
-    /* EE_OPT = "OS_EE_VERBOSE"; */
-    EE_OPT = "OSEE_DEBUG";
-    EE_OPT = "OSEE_ASSERT";
-    EE_OPT = "OS_EE_APPL_BUILD_DEBUG";
-    EE_OPT = "OS_EE_BUILD_DEBUG";
-/*	EE_OPT = "OSEE_TRICORE_ILLD"; */
-    
-	CPU_DATA = TRICORE {
-      ID = 0x0;
-      CPU_CLOCK = 200.0;
-      IDLEHOOK = TRUE {
-      HOOKNAME = "idle_hook_core0";
-      };
-      MULTI_STACK = TRUE {
-        IRQ_STACK = TRUE {
-          SIZE = 256;
+    OS EE {
+        /* EE_OPT = "OS_EE_VERBOSE"; */
+        EE_OPT = "OSEE_DEBUG";
+        EE_OPT = "OSEE_ASSERT";
+        EE_OPT = "OS_EE_APPL_BUILD_DEBUG";
+        EE_OPT = "OS_EE_BUILD_DEBUG";
+        /*	EE_OPT = "OSEE_TRICORE_ILLD"; */
+
+        STATUS = EXTENDED;
+        ERRORHOOK = TRUE;
+        USERESSCHEDULER = FALSE;
+        USEORTI = TRUE;
+        KERNEL_TYPE = OSEK { CLASS = ECC2; };
+
+        CPU_DATA = TRICORE {
+            ID = 0x0;
+            CPU_CLOCK = 200.0;
+            IDLEHOOK = TRUE {HOOKNAME = "idle_hook_core0";};
+            MULTI_STACK = TRUE { IRQ_STACK = TRUE { SIZE = 256; }; };
         };
-      };
+
+        CPU_DATA = TRICORE {
+            ID = 0x1;
+            MULTI_STACK = TRUE;
+            IDLEHOOK = TRUE { HOOKNAME = "idle_hook_core1"; };
+        };
+
+        CPU_DATA = TRICORE {
+            ID = 0x2;
+            IDLEHOOK = TRUE { HOOKNAME = "idle_hook_core2";};
+        };
+
+        MCU_DATA = TC27X {
+            DERIVATIVE = "tc275D";
+            REVISION = "DC";
+        };
     };
-
-    CPU_DATA = TRICORE {
-      ID = 0x1;
-      MULTI_STACK = TRUE;
-      IDLEHOOK = TRUE {
-        HOOKNAME = "idle_hook_core1";
-      };
-    };
-
-    CPU_DATA = TRICORE {
-      ID = 0x2;
-      IDLEHOOK = TRUE {
-        HOOKNAME = "idle_hook_core2";
-      };
-    };
-
-    MCU_DATA = TC27X {
-      DERIVATIVE = "tc275D";
-      REVISION = "DC";
-    };
-
-    STATUS = EXTENDED;
-    ERRORHOOK = TRUE;
-    USERESSCHEDULER = FALSE;
-
-    USEORTI = TRUE;
-
-    KERNEL_TYPE = OSEK {
-      CLASS = ECC2;
-    };
-  };
-
-	APPMODE TRICORE_CPU;
 
     TASK IFX_OSTASK_EVENT1 { 
         PRIORITY = 64; 
@@ -59,9 +43,7 @@ CPU test_application {
         AUTOSTART = FALSE;
         EVENT = IFX_OSCFG_EVENT1;
         SCHEDULE = FULL;
-        STACK = PRIVATE {
-            SIZE = 256;
-        };
+        STACK = PRIVATE { SIZE = 256; };
    };
     
     TASK IFX_OSTASK_EVENT2 { 
@@ -70,9 +52,7 @@ CPU test_application {
         AUTOSTART = FALSE;
         EVENT = IFX_OSCFG_EVENT2;
         SCHEDULE = FULL;
-        STACK = PRIVATE {
-            SIZE = 256;
-        };
+        STACK = PRIVATE { SIZE = 256; };
     };
     
     TASK IFX_OSTASK_EVENT3 { 
@@ -81,9 +61,7 @@ CPU test_application {
         AUTOSTART = FALSE;
         EVENT = IFX_OSCFG_EVENT3;
         SCHEDULE = FULL;
-        STACK = PRIVATE {
-           SIZE = 256;
-		};
+        STACK = PRIVATE { SIZE = 256; };
     };
     
     TASK IFX_OSTASK_1MS{ 
@@ -145,27 +123,23 @@ CPU test_application {
     TASK IFX_OSTASK_INIT{ 
         PRIORITY = 2; 
         ACTIVATION = 1;
-        AUTOSTART = TRUE { APPMODE = TRICORE_CPU; };
+        AUTOSTART = TRUE;
+        SCHEDULE = FULL; STACK = SHARED;
+    };
+
+    TASK TaskSlave1 {
+        CPU_ID = 0x1;
+        PRIORITY = 1;
+        AUTOSTART = TRUE;
+        STACK = PRIVATE { SIZE = 256; };
+        ACTIVATION = 1;
         SCHEDULE = FULL;
-        STACK = SHARED;
     };
 
-  TASK TaskSlave1 {
-    CPU_ID = 0x1;
-    PRIORITY = 1;
-    AUTOSTART = TRUE;
-    STACK = PRIVATE {
-      SIZE = 256;
+    TASK TaskSlave2 {
+        CPU_ID = 0x2;
+        PRIORITY = 1;
     };
-    ACTIVATION = 1;
-    SCHEDULE = FULL;
-  };
-
-  TASK TaskSlave2 {
-    CPU_ID = 0x2;
-    PRIORITY = 1;
-  };
-
 
     EVENT IFX_OSCFG_EVENT1 {
         MASK = 0x01;
@@ -179,108 +153,77 @@ CPU test_application {
         MASK = 0x04;
     };
 
-
-
-
-  COUNTER system_timer_master {
-    CPU_ID = 0x0;
-    MINCYCLE = 1;
-    MAXALLOWEDVALUE = 2147483647;
-    TICKSPERBASE = 1;
-    TYPE = HARDWARE {
-        DEVICE = "STM_SR0";
-        SYSTEM_TIMER = TRUE;
-        PRIORITY = 2;
-    };
-    SECONDSPERTICK = 0.001;
-  };
-
-/*
-    COUNTER IFX_OSTASK_COUNTER {
+    COUNTER system_timer_master {
         CPU_ID = 0x0;
         MINCYCLE = 1;
-        MAXALLOWEDVALUE = 10000;
+        MAXALLOWEDVALUE = 2147483647;
         TICKSPERBASE = 1;
-        SECONDSPERTICK = 0.1;
-    };
-*/
-            
-    ALARM IFX_OSTASK_ALARM_1MS {
-        ACTION = ACTIVATETASK {
-            TASK = IFX_OSTASK_1MS;
+        TYPE = HARDWARE {
+            DEVICE = "STM_SR0";
+            SYSTEM_TIMER = TRUE;
+            PRIORITY = 2;
         };
+        SECONDSPERTICK = 0.001;
+    };
+
+    ALARM IFX_OSTASK_ALARM_1MS {
+        ACTION = ACTIVATETASK { TASK = IFX_OSTASK_1MS; };
         COUNTER = system_timer_master;
         AUTOSTART = TRUE { 
-            APPMODE = TRICORE_CPU;
             ALARMTIME = 1;
             CYCLETIME = 1;
         };
     };
     
     ALARM IFX_OSTASK_ALARM_5MS {
-        ACTION = ACTIVATETASK {
-            TASK = IFX_OSTASK_5MS;
-        };
+        ACTION = ACTIVATETASK { TASK = IFX_OSTASK_5MS; };
         COUNTER = system_timer_master;
         AUTOSTART = TRUE {
-            APPMODE = TRICORE_CPU;
             ALARMTIME = 5;
             CYCLETIME = 5;
         };
     };
     
     ALARM IFX_OSTASK_ALARM_10MS {
-        ACTION = ACTIVATETASK {
-            TASK = IFX_OSTASK_10MS;
-        };
+        ACTION = ACTIVATETASK { TASK = IFX_OSTASK_10MS; };
         COUNTER = system_timer_master;
         AUTOSTART = TRUE {
-            APPMODE = TRICORE_CPU;
             ALARMTIME = 5;
             CYCLETIME = 10;
         };
     };
     
      ALARM IFX_OSTASK_ALARM_20MS {
-        ACTION = ACTIVATETASK {
-            TASK = IFX_OSTASK_20MS;
-        };
+        ACTION = ACTIVATETASK { TASK = IFX_OSTASK_20MS; };
         COUNTER = system_timer_master;
         AUTOSTART = TRUE {
-            APPMODE = TRICORE_CPU;
             ALARMTIME = 10;
             CYCLETIME = 20;
         };
     };
     
     ALARM IFX_OSTASK_ALARM_50MS {
-        ACTION = ACTIVATETASK {
-            TASK = IFX_OSTASK_50MS;
-        };
+        ACTION = ACTIVATETASK { TASK = IFX_OSTASK_50MS; };
         COUNTER = system_timer_master;
         AUTOSTART = TRUE {
-            APPMODE = TRICORE_CPU;
             ALARMTIME = 25;
             CYCLETIME = 50;
         };
     };
     
     ALARM IFX_OSTASK_ALARM_100MS {
-        ACTION = ACTIVATETASK {
-            TASK = IFX_OSTASK_100MS;
-        };
+        ACTION = ACTIVATETASK { TASK = IFX_OSTASK_100MS; };
         COUNTER = system_timer_master;
         AUTOSTART = TRUE {
-            APPMODE = TRICORE_CPU;
             ALARMTIME = 50;
             CYCLETIME = 100;
         };
     };
 
-  ISR TimerISR {
-    CATEGORY = 2;
-    SOURCE   = "STM0SR1";
-    HANDLER  = "Ifx_OSTask_BlinkLedIsr";
-    PRIORITY = 11;
-  };
+    ISR TimerISR {
+        CATEGORY = 2;
+        SOURCE   = "STM0SR1";
+        HANDLER  = "Ifx_OSTask_BlinkLedIsr";
+        PRIORITY = 11;
+    };
 };
