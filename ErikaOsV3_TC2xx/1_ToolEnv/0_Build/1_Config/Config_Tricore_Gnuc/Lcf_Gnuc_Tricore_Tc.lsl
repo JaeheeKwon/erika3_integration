@@ -207,6 +207,7 @@ CORE_ID = GLOBAL ;
 
 SECTIONS
 {
+/* for bmhd
   .bmhd_0 (0x80000000) :
   {
     BootModeIndex = .;
@@ -219,15 +220,16 @@ SECTIONS
     LONG (0x791eb864);
     LONG (0x86e1479b);
   }
+*/
 /* This section is always required as Boot mode header 0 address absolutely
    restricted at address 0x80000000 */
-/*
+
   .bmhd0 (0x80000000) : FLAGS(arl)
   {
     BootModeHeader0 = .;
     KEEP (*(.bmhd0))
   } > PMU_PFLASH
-*/
+
 /* This section is always required as Boot mode header 1 address absolutely
    restricted at address 0x80020000 */
   .bmhd1 (0x80020000) : FLAGS(arl)
