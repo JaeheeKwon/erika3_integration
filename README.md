@@ -21,7 +21,7 @@ BIFACES환경에서 Erika 3 RTOS 지원하기위한 모듈과 Makefile을 제공
 - make osclean : OS관련하여 생성된 코드를 삭제함. OIL수정시 실행 권장.
 
 ## Test Environment
-- HW: Aurix TC275 ShieldBuddy
+- HW: Aurix TC275 ShieldBuddy (https://www.ehitex.de/starter-kits/fuer-aurix/2535/hitex-shieldbuddytc275-aurix-powered-arduino-uno-r3-hardware-compatible-platform)
 - Compiler: HighTec Free Compiler
 - Debugger: Pls UDE as a part of free evluation tool bundle
 
