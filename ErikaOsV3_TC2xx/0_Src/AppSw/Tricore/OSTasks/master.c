@@ -41,8 +41,6 @@
 #define Ifx_OSTask_SetEvent(x,y)
 #endif
 
-char led = 0;
-
 void Ifx_OSTask_ApplicationInit(void)
 {
 	StartOS(TRICORE_CPU);
@@ -124,7 +122,7 @@ TASK(IFX_OSTASK_EVENT1)
 		Ifx_OSTask_WaitEvent ( 1 );
 		{
 			/*Call your event 1 related functions here*/
-			TriboardLed_sweepGlow(); //TODO : Application call
+			//TriboardLed_sweepGlow(); //TODO : Application call
 		}
 	}
 	TerminateTask();
@@ -176,9 +174,6 @@ TASK(IFX_OSTASK_10MS)
 	Ifx_OSTask_10ms_Count++;
 	{
 		/*Call your 10ms functions here*/
-
-
-		P02_OUT.B.P6 ^= 1;
 	}
 	TerminateTask();
 }
@@ -200,9 +195,7 @@ TASK(IFX_OSTASK_50MS)
 	{
 		/*Call your 100ms functions here*/
 		//Ifx_OSTask_SetEvent (IFX_OSTASK_EVENT1, 1);
-		//
-		//
-		//
+		//P02_OUT.B.P6 ^= 1;
 	}
 	TerminateTask();
 }
@@ -210,11 +203,14 @@ TASK(IFX_OSTASK_50MS)
 uint32 Ifx_OSTask_100ms_Count;
 TASK(IFX_OSTASK_100MS)
 {
+	static int cnt = 0;
 	Ifx_OSTask_100ms_Count++;
 	{
 		/*Call your 100ms functions here*/
-
-		TriboardLed_toggleDimSwitch(); //TODO : Application call
+		if ((cnt++)%5 == 0) {
+			P02_OUT.B.P6 ^= 1;
+		}
+		//TriboardLed_toggleDimSwitch(); //TODO : Application call
 	}
 	TerminateTask();
 }
@@ -243,17 +239,17 @@ TASK(IFX_OSTASK_INIT)
 /*  Alarms are Auto started with the same parameters as below. Code below is not necessary.
  * You could also implement this if you want to change the parameters of alarms
  */
-	SetRelAlarm(IFX_OSTASK_ALARM_1MS,5,10);
-	SetRelAlarm(IFX_OSTASK_ALARM_5MS,25,50);
-	SetRelAlarm(IFX_OSTASK_ALARM_10MS,50,100);
-	SetRelAlarm(IFX_OSTASK_ALARM_20MS,100,200);
-	SetRelAlarm(IFX_OSTASK_ALARM_50MS,250,500);
-	SetRelAlarm(IFX_OSTASK_ALARM_100MS,500,1000);
-
+#if 0	
+	SetRelAlarm(IFX_OSTASK_ALARM_1MS,0,1);
+	SetRelAlarm(IFX_OSTASK_ALARM_5MS,2,5);
+	SetRelAlarm(IFX_OSTASK_ALARM_10MS,5,10);
+	SetRelAlarm(IFX_OSTASK_ALARM_20MS,10,20);
+	SetRelAlarm(IFX_OSTASK_ALARM_50MS,25,50);
+	SetRelAlarm(IFX_OSTASK_ALARM_100MS,50,100);
+#endif
 	/// Ifx_OSTask_initStm0Ticks ();
-	Ifx_OSTask_initBlinkyLedFunction();
-	led = 0;	
-	 P02_IOCR4.B.PC6    =   OSEE_TC2YX_OUTPUT_PUSH_PULL_GP;
+	//Ifx_OSTask_initBlinkyLedFunction();
+	P02_IOCR4.B.PC6    =   OSEE_TC2YX_OUTPUT_PUSH_PULL_GP;
 
 	TriboardLed_init(); //TODO : Application call
 

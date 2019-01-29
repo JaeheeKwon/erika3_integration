@@ -192,7 +192,7 @@ CPU test_application {
         SYSTEM_TIMER = TRUE;
         PRIORITY = 2;
     };
-    SECONDSPERTICK = 0.01;
+    SECONDSPERTICK = 0.001;
   };
 
 /*
@@ -212,8 +212,8 @@ CPU test_application {
         COUNTER = system_timer_master;
         AUTOSTART = TRUE { 
             APPMODE = TRICORE_CPU;
-            ALARMTIME = 5;
-            CYCLETIME = 10;
+            ALARMTIME = 1;
+            CYCLETIME = 1;
         };
     };
     
@@ -224,8 +224,8 @@ CPU test_application {
         COUNTER = system_timer_master;
         AUTOSTART = TRUE {
             APPMODE = TRICORE_CPU;
-            ALARMTIME = 25;
-            CYCLETIME = 50;
+            ALARMTIME = 5;
+            CYCLETIME = 5;
         };
     };
     
@@ -236,8 +236,8 @@ CPU test_application {
         COUNTER = system_timer_master;
         AUTOSTART = TRUE {
             APPMODE = TRICORE_CPU;
-            ALARMTIME = 50;
-            CYCLETIME = 100;
+            ALARMTIME = 5;
+            CYCLETIME = 10;
         };
     };
     
@@ -248,8 +248,8 @@ CPU test_application {
         COUNTER = system_timer_master;
         AUTOSTART = TRUE {
             APPMODE = TRICORE_CPU;
-            ALARMTIME = 100;
-            CYCLETIME = 200;
+            ALARMTIME = 10;
+            CYCLETIME = 20;
         };
     };
     
@@ -260,8 +260,8 @@ CPU test_application {
         COUNTER = system_timer_master;
         AUTOSTART = TRUE {
             APPMODE = TRICORE_CPU;
-            ALARMTIME = 250;
-            CYCLETIME = 500;
+            ALARMTIME = 25;
+            CYCLETIME = 50;
         };
     };
     
@@ -272,8 +272,8 @@ CPU test_application {
         COUNTER = system_timer_master;
         AUTOSTART = TRUE {
             APPMODE = TRICORE_CPU;
-            ALARMTIME = 500;
-            CYCLETIME = 1000;
+            ALARMTIME = 50;
+            CYCLETIME = 100;
         };
     };
 
