@@ -1,11 +1,7 @@
-# Erika Version 3 integration
+# Erika 3 Integration
 
 ## Introduction
 BIFACES환경에서 Erika 3 RTOS 지원하기위한 모듈과 Makefile을 제공한다. Erika OS와 BIFACES는 미포함.
-
-## 제약 사항
-- Erika3에서 iLLD 미사용으로 설정하는 경우 컴파일 문제 발생한다. 항상 iLLD사용으로 설정.
-- Starup과 OsTimer(STM0)는 Erika에서 제공되는 코드를 사용
 
 ## 적용 순서
 1. BIFACES, HIGHTEC Compiler 설치
@@ -19,14 +15,17 @@ BIFACES환경에서 Erika 3 RTOS 지원하기위한 모듈과 Makefile을 제공
 1. StartBifacesDos.bat 실행
 1. make all
 
+## 제약 사항
+- Erika3에서 iLLD 미사용으로 설정하는 경우 컴파일 문제 발생한다. 항상 iLLD사용으로 설정.
+- Starup과 OsTimer(STM0)는 Erika에서 제공되는 코드를 사용
+
 ## 기타
 - make osclean : OS관련하여 생성된 코드를 삭제함. OIL수정시 실행 권장.
 
 ## Test Environment
-- HW: Aurix TC275 ShieldBuddy (https://www.ehitex.de/starter-kits/fuer-aurix/2535/hitex-shieldbuddytc275-aurix-powered-arduino-uno-r3-hardware-compatible-platform)
+- HW: Infineon Aurix TC275 ShieldBuddy (https://www.ehitex.de/starter-kits/fuer-aurix/2535/hitex-shieldbuddytc275-aurix-powered-arduino-uno-r3-hardware-compatible-platform)
 - Compiler: HighTec Free Compiler
 - Debugger: Pls UDE as a part of free evluation tool bundle
-
 
 ## ToDo
 - HW 테스트 중: ISR 및 OS timer(Stm)동작 확인완료 (Led Blink)
