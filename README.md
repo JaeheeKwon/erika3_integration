@@ -16,7 +16,7 @@ BIFACES환경에서 Erika 3 RTOS 지원하기위한 모듈과 Makefile을 제공
 1. make all
 
 ## 제약 사항
-- Erika3에서 iLLD 미사용으로 설정하는 경우 컴파일 문제 발생한다. 항상 iLLD사용으로 설정.
+- Erika3에서 iLLD 미사용으로 설정하는 경우 컴파일 문제가 발생한다. 항상 iLLD사용으로 설정.
 - Starup과 OsTimer(STM0)는 Erika에서 제공되는 코드를 사용
 
 ## 기타
