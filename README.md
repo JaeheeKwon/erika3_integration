@@ -1,14 +1,14 @@
 # Erika 3 Integration
 
 ## Introduction
-BIFACES환경에서 Erika 3 RTOS 지원하기위한 모듈과 Makefile을 제공한다. Erika OS와 BIFACES는 미포함.
+BIFACES환경에서 Erika 3 RTOS 지원하기위한 모듈과 Makefile을 제공한다. 본 Repoㅇ에는 Erika OS와 BIFACES는 미포함.
 
 ## 적용 순서
 1. BIFACES, HIGHTEC Compiler 설치
 1. Download Erika3
    http://www.erika-enterprise.com/index.php/download/erika-v3-download.html
     ![](./img/gh55.png)
-1. Erika3를 c:\Toolsl\RT-Druid에 설치 (현재 Makefile은 이 경로를 사용하고 있음)
+1. Erika3를 c:\Tools\RT-Druid에 설치 (현재 Makefile은 이 경로를 사용하고 있음)
 1. ErikaOsV3_TC2xx폴더를 Bifaces의 프로젝트에 복사 (BIFACES의 Erika2와 동일 방식)
 1. (1_ToolEnv/Config 폴더내의 Config.mk내의 경로 정보 수정)
 1. (1_ToolEnv/Config/컴파일러 폴더의 Config_Gnuc.mk내의 컴파일러 경로 정보 수정)
